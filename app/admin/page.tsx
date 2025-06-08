@@ -105,6 +105,7 @@ export default function AdminDashboard() {
           <AdminInquiries />
         </TabsContent>
       </Tabs>
+      <></>
     </div>
   )
 }
