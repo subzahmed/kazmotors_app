@@ -25,7 +25,7 @@ const mockCars = [
       "Panoramic Sunroof",
     ],
     description: "Experience luxury and performance with this stunning 2023 Mercedes-Benz S-Class.",
-    images: ["/placeholder.svg?height=600&width=800"],
+    images: ["/placeholder.jpeg?height=600&width=800"],
     featured: true,
     status: "available",
     createdAt: new Date().toISOString(),
@@ -52,7 +52,7 @@ const mockCars = [
       "Panoramic Sky Lounge LED Roof",
     ],
     description: "Luxury meets performance in this elegant 2022 BMW 7 Series sedan.",
-    images: ["/placeholder.svg?height=600&width=800"],
+    images: ["/placeholder.jpeg?height=600&width=800"],
     featured: true,
     status: "available",
     createdAt: new Date().toISOString(),
@@ -79,7 +79,7 @@ const mockCars = [
       "Night Vision Assistant",
     ],
     description: "Experience the pinnacle of Audi luxury with this 2023 A8 sedan.",
-    images: ["/placeholder.svg?height=600&width=800"],
+    images: ["/placeholder.jpeg?height=600&width=800"],
     featured: false,
     status: "available",
     createdAt: new Date().toISOString(),
@@ -134,6 +134,8 @@ export async function getCars() {
   try {
     const client = await clientPromise
     const db = client.db(process.env.MONGODB_DB || "kazmotors")
+
+    console.log("here")
 
     const cars = await db.collection("cars").find({}).sort({ createdAt: -1 }).toArray()
 

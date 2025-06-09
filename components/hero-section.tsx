@@ -8,7 +8,7 @@ export function HeroSection() {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: "url('/placeholder.svg?height=800&width=1600')",
+          backgroundImage: "url('/placeholder.jpeg?height=800&width=1600')",
           opacity: 0.3,
         }}
       />

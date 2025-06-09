@@ -144,7 +144,7 @@ export function AdminAddCar() {
           description: "",
           featured: false,
         })
-        setImages(["/placeholder.svg?height=600&width=800"])
+        setImages(["/placeholder.jpeg?height=600&width=800"])
       } else {
         toast({
           title: "Error",
@@ -175,7 +175,7 @@ export function AdminAddCar() {
           {images.map((image, index) => (
             <div key={index} className="relative aspect-square rounded-md overflow-hidden border">
               <img
-                src={image || "/placeholder.svg?height=600&width=800"}
+                src={image || "/placeholder.jpeg?height=600&width=800"}
                 alt={`Vehicle image ${index + 1}`}
                 className="w-full h-full object-cover"
               />

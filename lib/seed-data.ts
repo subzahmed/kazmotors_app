@@ -125,7 +125,7 @@ function generateRandomCar() {
     vin: vin,
     features: features,
     description: `This ${year} ${make} ${model} is a great vehicle with ${mileage.toLocaleString()} miles. It features a ${engine} engine, ${transmission} transmission, and a beautiful ${exteriorColor} exterior with ${interiorColor} interior. Well maintained and ready for a new owner.`,
-    images: ["/placeholder.svg?height=600&width=800"],
+    images: ["/placeholder.jpeg?height=600&width=800"],
     featured: featured,
     status: status,
   }

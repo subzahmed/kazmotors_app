@@ -181,7 +181,7 @@ export function AdminCarList() {
                     <div className="flex items-center">
                       <div className="h-10 w-10 flex-shrink-0 overflow-hidden rounded">
                         <Image
-                          src={car.images[0] || "/placeholder.svg?height=600&width=800"}
+                          src={car.images[0] || "/placeholder.jpeg?height=600&width=800"}
                           alt={car.title}
                           width={40}
                           height={40}

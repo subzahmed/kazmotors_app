@@ -3,14 +3,10 @@ import { isMongoAvailable } from "./cars"
 
 // Mock data for when MongoDB isn't available
 const mockStats = {
-  totalVehicles: 63,
-  vehiclesChange: 2,
-  activeInquiries: 12,
-  inquiriesChange: 3,
-  totalCustomers: 245,
-  customersChange: 18,
-  totalRevenue: 452500,
-  revenueChange: 20.1,
+  totalVehicles: 0,
+  vehiclesChange: 0,
+  activeInquiries: 0,
+  inquiriesChange: 0,
 }
 
 export async function getDashboardStats() {
@@ -47,32 +43,11 @@ export async function getDashboardStats() {
       createdAt: { $gte: yesterday },
     })
 
-    // Get unique customers (based on email) and monthly change
-    const uniqueEmails = await db.collection("inquiries").distinct("email")
-    const totalCustomers = uniqueEmails.length
-
-    const previousMonthEmails = await db.collection("inquiries").distinct("email", {
-      createdAt: { $gte: previousMonthStart, $lte: previousMonthEnd },
-    })
-    const customersChange = totalCustomers - previousMonthEmails.length
-
-    // Calculate total revenue (sum of all car prices)
-    const cars = await db.collection("cars").find({}).toArray()
-    const totalRevenue = cars.reduce((sum, car) => sum + (car.price || 0), 0)
-
-    // For revenue change, we'd typically compare with previous month sales
-    // For this demo, we'll use a random percentage between 5-25%
-    const revenueChange = Number.parseFloat((Math.random() * 20 + 5).toFixed(1))
-
     return {
       totalVehicles,
       vehiclesChange: totalVehicles - previousMonthVehicles,
       activeInquiries,
       inquiriesChange: yesterdayInquiries,
-      totalCustomers,
-      customersChange,
-      totalRevenue,
-      revenueChange,
     }
   } catch (error) {
     console.error("Error fetching dashboard stats from MongoDB:", error)

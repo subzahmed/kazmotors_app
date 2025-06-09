@@ -61,7 +61,7 @@ export default function AboutPage() {
             </div>
             <div className="relative">
               <Image
-                src="/placeholder.svg?height=400&width=600"
+                src="/placeholder.jpeg?height=400&width=600"
                 alt="KazMotors Showroom"
                 width={600}
                 height={400}
@@ -146,7 +146,7 @@ export default function AboutPage() {
               <CardContent className="p-6">
                 <div className="relative mb-4">
                   <Image
-                    src="/placeholder.svg?height=200&width=200"
+                    src="/placeholder.jpeg?height=200&width=200"
                     alt="John Smith"
                     width={200}
                     height={200}
@@ -165,7 +165,7 @@ export default function AboutPage() {
               <CardContent className="p-6">
                 <div className="relative mb-4">
                   <Image
-                    src="/placeholder.svg?height=200&width=200"
+                    src="/placeholder.jpeg?height=200&width=200"
                     alt="Sarah Johnson"
                     width={200}
                     height={200}
@@ -184,7 +184,7 @@ export default function AboutPage() {
               <CardContent className="p-6">
                 <div className="relative mb-4">
                   <Image
-                    src="/placeholder.svg?height=200&width=200"
+                    src="/placeholder.jpeg?height=200&width=200"
                     alt="Mike Davis"
                     width={200}
                     height={200}
