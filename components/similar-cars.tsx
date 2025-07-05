@@ -80,7 +80,7 @@ export function SimilarCars({ currentCarId, make }: { currentCarId: string; make
           <div className="relative">
             <Link href={`/inventory/${car._id}`}>
               <Image
-                src={car.images[0] || "/placeholder.svg?height=600&width=800"}
+                src={car.images[0] || "/placeholder.jpeg?height=600&width=800"}
                 alt={car.title}
                 width={800}
                 height={600}

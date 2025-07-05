@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { MapPin, Phone, Mail, Clock, Send } from "lucide-react"
+import { MapPin, Phone, Mail, Clock, Send, User } from "lucide-react"
 
 export default function ContactPage() {
   return (
@@ -97,6 +97,26 @@ export default function ContactPage() {
 
             {/* Contact Information */}
             <div className="space-y-8">
+              <Card className="bg-hom-gray border-0">
+                <CardContent className="p-6">
+                  <div className="flex items-start">
+                    <div className="bg-hom-red h-12 w-12 rounded-full flex items-center justify-center mr-4">
+                      <User className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-white mb-2">CEO</h3>
+                      <p className="text-gray-300">
+                        Ali Raza
+                        <br />
+                        Chief Executive Officer
+                        <br />
+                        Leading KazMotors with vision and excellence
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
               <Card className="bg-hom-gray border-0">
                 <CardContent className="p-6">
                   <div className="flex items-start">
