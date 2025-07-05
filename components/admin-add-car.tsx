@@ -15,7 +15,8 @@ import { Upload, X } from "lucide-react"
 export function AdminAddCar() {
   const { toast } = useToast()
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [images, setImages] = useState<string[]>(["/placeholder.svg?height=600&width=800"])
+  const [images, setImages] = useState<string[]>([])
+  const [uploadingImages, setUploadingImages] = useState(false)
   const [formData, setFormData] = useState({
     title: "",
     price: "",
@@ -49,7 +50,7 @@ export function AdminAddCar() {
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
-      setIsSubmitting(true)
+      setUploadingImages(true)
 
       for (let i = 0; i < e.target.files.length; i++) {
         const file = e.target.files[i]
@@ -66,6 +67,10 @@ export function AdminAddCar() {
 
           if (data.success) {
             setImages((prev) => [...prev, data.fileUrl])
+            toast({
+              title: "Image uploaded",
+              description: "Image uploaded successfully to cloud storage.",
+            })
           } else {
             toast({
               title: "Upload Failed",
@@ -83,7 +88,9 @@ export function AdminAddCar() {
         }
       }
 
-      setIsSubmitting(false)
+      setUploadingImages(false)
+      // Clear the input
+      e.target.value = ""
     }
   }
 
@@ -95,6 +102,16 @@ export function AdminAddCar() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    if (images.length === 0) {
+      toast({
+        title: "Images Required",
+        description: "Please upload at least one image for the vehicle.",
+        variant: "destructive",
+      })
+      return
+    }
+
     setIsSubmitting(true)
 
     try {
@@ -104,7 +121,10 @@ export function AdminAddCar() {
         price: Number.parseFloat(formData.price),
         year: Number.parseInt(formData.year),
         mileage: Number.parseInt(formData.mileage),
-        features: formData.features.split(",").map((feature) => feature.trim()),
+        features: formData.features
+          .split(",")
+          .map((feature) => feature.trim())
+          .filter((f) => f.length > 0),
         images,
         status: "available",
       }
@@ -144,7 +164,7 @@ export function AdminAddCar() {
           description: "",
           featured: false,
         })
-        setImages(["/placeholder.jpeg?height=600&width=800"])
+        setImages([])
       } else {
         toast({
           title: "Error",
@@ -175,7 +195,7 @@ export function AdminAddCar() {
           {images.map((image, index) => (
             <div key={index} className="relative aspect-square rounded-md overflow-hidden border">
               <img
-                src={image || "/placeholder.jpeg?height=600&width=800"}
+                src={image || "/placeholder.svg"}
                 alt={`Vehicle image ${index + 1}`}
                 className="w-full h-full object-cover"
               />
@@ -197,7 +217,7 @@ export function AdminAddCar() {
               className="cursor-pointer flex flex-col items-center justify-center w-full h-full"
             >
               <Upload className="h-8 w-8 mb-2 text-gray-400" />
-              <span className="text-sm text-gray-500">Upload Image</span>
+              <span className="text-sm text-gray-500">{uploadingImages ? "Uploading..." : "Upload Image"}</span>
               <Input
                 id="image-upload"
                 type="file"
@@ -205,10 +225,14 @@ export function AdminAddCar() {
                 multiple
                 className="hidden"
                 onChange={handleImageUpload}
+                disabled={uploadingImages}
               />
             </Label>
           </div>
         </div>
+        <p className="text-sm text-gray-500">
+          Images are stored securely in cloud storage. Supported formats: JPEG, PNG, WebP (max 5MB each)
+        </p>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
@@ -394,7 +418,7 @@ export function AdminAddCar() {
         </Label>
       </div>
 
-      <Button type="submit" className="w-full" disabled={isSubmitting}>
+      <Button type="submit" className="w-full" disabled={isSubmitting || uploadingImages}>
         {isSubmitting ? "Adding Vehicle..." : "Add Vehicle"}
       </Button>
     </form>
